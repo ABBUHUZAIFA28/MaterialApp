@@ -114,11 +114,9 @@ const WiringMaterialFinalPage = () => {
 
   return (
     <div ref={tableRef}>
-      <h2 className="text-xl mb-4 font-semibold text-center">
-        Wiring Material
-      </h2>
       <div className="grid place-items-center border border-black w-full h-full">
       <table className="w-auto mx-20px border border-collapse">
+        <caption >Wiring Material</caption>
         <thead className="bg-gray-200">
           <tr>
             <th className="sn-col">S.no</th>

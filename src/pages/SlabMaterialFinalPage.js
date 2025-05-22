@@ -29,13 +29,11 @@ const SlabMaterialFinalPage = () => {
   let serial = 1;
   return (
     <div className="w-full  mx-auto h-screen border border-black">
-      <h2 className="text-xl mb-4 font-semibold text-center">
-        Slab Material
-      </h2>
       <div ref={tableRef}>
         
         <div className=" border border-black   max-w-4xl">
           <table className="w-full border border-collapse ">
+            <caption >Slab Material</caption>
             <thead className="bg-gray-200">
               <tr>
                 <th className="sn-col">S.no</th>

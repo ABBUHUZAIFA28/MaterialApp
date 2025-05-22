@@ -56,11 +56,10 @@ const GaalaMaterialFinalPage = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <h2 className="text-xl mb-4 font-semibold text-center">Gaala Material</h2>
-
       <div ref={tableRef}>
         <div className="overflow-x-auto w-full max-w-4xl">
           <table className="w-full border border-collapse">
+            <caption >Gaala Material</caption>
             <thead className="bg-gray-200">
               <tr>
                 <th className="sn-col">S.no</th>

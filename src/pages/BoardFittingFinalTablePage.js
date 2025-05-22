@@ -40,15 +40,13 @@ const BoardFittingFinalTablePage = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <h2 className="text-xl mb-4 font-semibold text-center">
-        Board Fitting's Material - Final Table
-      </h2>
 
       {/* ✅ Wrap this div with the ref */}
       <div ref={tableRef}>
         {/* Main Material Table */}
         <div className="overflow-x-auto w-full max-w-4xl">
           <table className="w-full border border-collapse">
+            <caption >BoardFitting Material </caption>
             <thead className="bg-gray-200">
               <tr>
                 <th className="sn-col">S.no</th>

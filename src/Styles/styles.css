@@ -73,6 +73,14 @@ button:hover {
   margin-top: 20px; /* optional spacing */
 } 
 
+caption{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: larger;
+  color:#1d4ed8;
+}
+
 
 @media (max-width: 600px) {
   table {
