@@ -132,7 +132,7 @@ const BoardFittingMaterialPage = () => {
 
             {/* Other Fittings */}
             {[
-              ["sw6a", "6A Switches"],
+              ["sw6a", "10A Switches"],
               ["sw2w", "2-Way Switches"],
               ["so6a", "6A 3-Pin Sockets"],
               ["soint", "International Sockets"],
@@ -146,7 +146,9 @@ const BoardFittingMaterialPage = () => {
               ["btnhld", "Button Holders"],
               ["clgrs", "Ceiling Roses"],
               ["dmysht", "Dummy Round Sheets"],
-              ["splsht", "Special Round Sheets(6.5 inch)"],
+              ["bdmysht", "Large Dummy Round Sheets(6.5 inch)"],
+              ["splsht", "Special Round Sheets"],
+              ["bsplsht", "Large Special Round Sheets(6.5 inch)"],
               ["msplsht", "Medium Special Sheets"],
               ["mdmysht", "Medium Dummy Sheets"],
               ["pvcTape", "PVC Tape"]

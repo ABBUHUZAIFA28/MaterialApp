@@ -7,7 +7,7 @@ const GaalaMaterialPage = () => {
     m4: 0, m6: 0, m18: 0, m16: 0, m12: 0,
     m8: 0, m3: 0, m2: 0, p1: 0, p75: 0, b1: 0,
     b75: 0, be1: 0, be75: 0, bl: 0, cw: 0,
-    abl: 0, n: 0, pvcTape: 0,
+    abl: 0, n: 0, pvcTape: 0,bd:0,
     mcbQty: 0, mcbType: ""
   });
 
@@ -95,7 +95,7 @@ const GaalaMaterialPage = () => {
 
             {/* Other Fittings */}
             {[
-              ["p1", "1-inch Pipes"],
+              ["p1", "1-inch Pipes(1.2 guage)"],
               ["p75", "3/4-inch Pipes"],
               ["b1", "1-inch Boxes"],
               ["b75", "3/4-inch Boxes"],
@@ -104,7 +104,7 @@ const GaalaMaterialPage = () => {
               ["bl", "Wall Cutting Blades"],
               ["abl", "HackSaw Blades"],
               ["cw", "CopperWire"],
-              ["n", "Nails"],
+              ["n", "Nails in Kg"],
               ["pvcTape", "PVC Tape"]
             ].map(([key, label]) => (
               <tr key={key}>

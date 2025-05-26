@@ -48,6 +48,7 @@ const SlabMaterialFinalPage = () => {
               ["p12", "1.2-inch Pipes"],
               ["db1", "Deep Boxes1-inch"],
               ["be", "1-inch Bends"],
+               ["bd","Box Dummies"],
               ["abl", "HackSaw Blades"],
                ["hks", "FanHooks"],
               ["sol", "Solution Bottle"],

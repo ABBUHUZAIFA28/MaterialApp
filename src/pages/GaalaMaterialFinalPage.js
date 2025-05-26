@@ -97,7 +97,7 @@ const GaalaMaterialFinalPage = () => {
               )}
 
               {[
-                ["p1", "1-inch Pipes"],
+                ["p1", "1-inch Pipes(1.2 guage"],
                 ["p75", "3/4-inch Pipes"],
                 ["b1", "1-inch Boxes"],
                 ["b75", "3/4-inch Boxes"],
