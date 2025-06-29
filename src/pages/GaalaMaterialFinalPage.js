@@ -50,10 +50,16 @@ const GaalaMaterialFinalPage = () => {
     "12Way": "MCB Box - 12Way",
     "16Way": "MCB Box - 16Way",
   };
+  const mcbTpnMap = {
+    "6Way-TPN": "MCB Box - 6Way-TPN",
+    "8Way-TPN": "MCB Box - 8Way-TPN",
+    "10Way-TPN": "MCB Box - 10Way-TPN"
+  }
 
   const selectedMcbLabel = mcbTypeMap[quantities.mcbType];
+  const selectedMcbTpnLabel = mcbTpnMap[quantities.mcbTpn];
   const selectedMcbQty = quantities.mcbQty || 0;
-
+  const selectedMcbTQty = quantities.mcbTQty || 0;
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div ref={tableRef}>
@@ -96,6 +102,14 @@ const GaalaMaterialFinalPage = () => {
                 </tr>
               )}
 
+              {selectedMcbTpnLabel && selectedMcbTQty > 0 && (
+                <tr>
+                  <td className="sn-col text-center border p-2">{serial++}.</td>
+                  <td className="">{selectedMcbTQty}</td>
+                  <td className="">{selectedMcbTpnLabel}</td>
+                </tr>
+              )}
+
               {[
                 ["p1", "1-inch Pipes(1.2 guage"],
                 ["p75", "3/4-inch Pipes"],
@@ -103,10 +117,10 @@ const GaalaMaterialFinalPage = () => {
                 ["b75", "3/4-inch Boxes"],
                 ["be1", "1-inch Bends"],
                 ["be75", "3/4-inch Bends"],
-                ["bl", "Wall Cutting Blades"],
+                ["bl", "Wall Cutting Blades 5-inch Swastik Gold Black"],
                 ["abl", "HackSaw Blades"],
                 ["cw", "CopperWire"],
-                ["n", "Nails in kg"],
+                ["n", "2.5-inchNails in kg"],
                 ["pvcTape", "PVC Tape"],
               ]
               .filter(([key]) => quantities[key] > 0)

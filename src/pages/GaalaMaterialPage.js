@@ -8,15 +8,20 @@ const GaalaMaterialPage = () => {
     m8: 0, m3: 0, m2: 0, p1: 0, p75: 0, b1: 0,
     b75: 0, be1: 0, be75: 0, bl: 0, cw: 0,
     abl: 0, n: 0, pvcTape: 0,bd:0,
-    mcbQty: 0, mcbType: ""
+    mcbQty: 0, mcbType: "",mcbTpn:"",mcbTQty: 0
   });
 
   const history = useHistory();
 
+  // const handleChange = (item, value) => {
+  //   setQuantities({ ...quantities, [item]: item === "mcbType" ? value : parseInt(value) || 0 });
+  // };
   const handleChange = (item, value) => {
-    setQuantities({ ...quantities, [item]: item === "mcbType" ? value : parseInt(value) || 0 });
-  };
-
+  setQuantities({
+    ...quantities,
+    [item]: ["mcbType", "mcbTpn"].includes(item) ? value : parseInt(value) || 0
+  });
+};
   const handleNext = () => {
     localStorage.setItem("GaalaData", JSON.stringify(quantities));
     localStorage.setItem("materialType", "Gaala");
@@ -92,6 +97,34 @@ const GaalaMaterialPage = () => {
                 </div>
               </td>
             </tr>
+             {/* MCB Box TPN with dropdown */}
+            <tr>
+              <td className="border p-2">{serial++}.</td>
+              <td className="border p-2">
+                <input
+                  type="number"
+                  className="border p-1 w-full"
+                  value={quantities.mcbTQty}
+                  onChange={(e) => handleChange("mcbTQty", e.target.value)}
+                />
+              </td>
+              <td className="border p-2">
+                MCB Box-TPN
+                <div className="mt-2">
+                  <select
+                    className="border p-1 w-full mt-1"
+                    value={quantities.mcbTpn}
+                    onChange={(e) => handleChange("mcbTpn", e.target.value)}
+                  >
+                    <option value="">-- Select Size --</option>
+                    <option value="6Way-TPN">6Way-TPN</option>
+                    <option value="8Way-TPN">8Way-TPN</option>
+                    <option value="10Way-TPN">10Way-TPN</option>
+                   
+                  </select>
+                </div>
+              </td>
+            </tr>
 
             {/* Other Fittings */}
             {[
@@ -101,10 +134,10 @@ const GaalaMaterialPage = () => {
               ["b75", "3/4-inch Boxes"],
               ["be1", "1-inch Bends"],
               ["be75", "3/4-inch Bends"],
-              ["bl", "Wall Cutting Blades"],
+              ["bl", "Wall Cutting Blades 5-inch Swastik Gold Black"],
               ["abl", "HackSaw Blades"],
               ["cw", "CopperWire"],
-              ["n", "Nails in Kg"],
+              ["n", "2.5-inchNails in Kg"],
               ["pvcTape", "PVC Tape"]
             ].map(([key, label]) => (
               <tr key={key}>
