@@ -2,6 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import html2pdf from "html2pdf.js";
+
 
 const BoardFittingFinalTablePage = () => {
   const [quantities, setQuantities] = useState({});
@@ -15,28 +17,29 @@ const BoardFittingFinalTablePage = () => {
   }, []);
 
   const handleDownloadPDF = () => {
-    const input = tableRef.current;
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("BoardFittingMaterial.pdf");
-    });
+  const element = tableRef.current;
+  const opt = {
+    margin:       0.5,
+    filename:     'BoardFittingMaterial.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, useCORS: true },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
   };
+
+  html2pdf().from(element).set(opt).save();
+};
 
   let serial = 1;
 
   const isolatorTypeMap = {
-    "63A 4pole": "63A 4-pole isolator ",
-    "63A 3pole": "63A 4-pole isolator ",
-    "40A 2pole": "40A 4-pole isolator ",
-  };
+  "63A4pole": "63A 4-pole isolator",
+  "63A3pole": "63A 3-pole isolator",
+  "63A2pole": "63A 2-pole isolator",
+  "40A2pole": "40A 2-pole isolator",
+};
 
-   const  selectedIsolatorLabel= isolatorTypeMap[quantities.mcbType];
-  const selectedIsolatorQty = quantities.mcbQty || 0;
+const selectedIsolatorLabel = isolatorTypeMap[quantities.isolatortype];
+const selectedIsolatorQty = quantities.isolatorqty || 0;
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -75,6 +78,7 @@ const BoardFittingFinalTablePage = () => {
               ))}
 
               {/* MCB */}
+              {(quantities.mcb > 0 || quantities.mcb16a > 0 || quantities.mcb20a > 0) && (
               <tr>
                 <td className="sn-col">{serial++}.</td>
                 <td className="qty-col">{quantities.mcb || 0}</td>
@@ -84,6 +88,7 @@ const BoardFittingFinalTablePage = () => {
                   <div className="mt-1">20A: {quantities.mcb20a || 0}</div>
                 </td>
               </tr>
+              )}
 
               {/* Isolator Types */}
            {selectedIsolatorLabel && selectedIsolatorQty > 0 && (

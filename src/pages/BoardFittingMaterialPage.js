@@ -15,9 +15,10 @@ const BoardFittingMaterialPage = () => {
 
   const history = useHistory();
 
-  const handleChange = (item, value) => {
-    setQuantities({ ...quantities, [item]: parseInt(value) || 0 });
-  };
+const handleChange = (item, value) => {
+  const isNumberField = !isNaN(value) && item !== "isolatortype";
+  setQuantities({ ...quantities, [item]: isNumberField ? parseInt(value) || 0 : value });
+};
 
   const handleNext = () => {
     localStorage.setItem("boardData", JSON.stringify(quantities));
@@ -109,7 +110,7 @@ const BoardFittingMaterialPage = () => {
                 <input
                   type="number"
                   className="border p-1 w-full"
-                  value={quantities.isolatorqt}
+                  value={quantities.isolatorqty}
                   onChange={(e) => handleChange("isolatorqty", e.target.value)}
                 />
               </td>
@@ -124,6 +125,7 @@ const BoardFittingMaterialPage = () => {
                     <option value="">-- Select Size --</option>
                     <option value="63A4pole">63A-4pole</option>
                     <option value="63A3pole">63A-3pole</option>
+                    <option value="63A2pole">63A-2pole</option>
                     <option value="40A2pole">40A-2pole</option>
                   </select>
                 </div>
