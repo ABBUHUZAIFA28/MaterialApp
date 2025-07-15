@@ -1,6 +1,7 @@
 import React, { useEffect, useState,useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import html2pdf from "html2pdf.js"
 
 const WiringMaterialFinalPage = () => {
   const [quantities, setQuantities] = useState({});
@@ -69,37 +70,20 @@ const WiringMaterialFinalPage = () => {
   ];
 
    const handleDownloadPDF = () => {
-  const input = tableRef.current;
-
-  html2canvas(input, {
-    scale: 2, // Higher resolution capture
-    useCORS: true,
-  }).then((canvas) => {
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    let position = 0;
-
-    // If content height exceeds one page, handle pagination
-    if (imgHeight > pageHeight) {
-      while (position < imgHeight) {
-        pdf.addImage(imgData, "PNG", 0, position * -1, imgWidth, imgHeight);
-        position += pageHeight;
-        if (position < imgHeight) pdf.addPage();
-      }
-    } else {
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    }
-
-    pdf.save("WiringMaterial.pdf");
-  });
-};
+     const element = tableRef.current;
+     const filename = prompt("Enter a filename for the PDF:", "WiringMaterial");
+     if (!filename) return; // User cancelled
+     const opt = {
+       margin:       0.5,
+       filename:     `${filename}.pdf`,
+       image:        { type: 'jpeg', quality: 0.98 },
+       html2canvas:  { scale: 2, useCORS: true },
+       jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+     };
+   
+     html2pdf().from(element).set(opt).save();
+   };
+   
 
 
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import html2pdf from "html2pdf.js";
 
 const SlabMaterialFinalPage = () => {
   const [quantities, setQuantities] = useState({});
@@ -12,19 +13,21 @@ const SlabMaterialFinalPage = () => {
       setQuantities(storedData);
     }
   }, []);
-
   const handleDownloadPDF = () => {
-    const input = tableRef.current;
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("SlabMaterial.pdf");
-    });
+    const element = tableRef.current;
+    const filename = prompt("Enter a filename for the PDF:", "SlabMaterial");
+    if (!filename) return; // User cancelled
+    const opt = {
+      margin:       0.5,
+      filename:     `${filename}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+  
+    html2pdf().from(element).set(opt).save();
   };
+  
 
   let serial = 1;
   return (

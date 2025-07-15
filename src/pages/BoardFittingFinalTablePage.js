@@ -18,9 +18,11 @@ const BoardFittingFinalTablePage = () => {
 
   const handleDownloadPDF = () => {
   const element = tableRef.current;
+  const filename = prompt("Enter a filename for the PDF:", "BoardFittingMaterial");
+  if (!filename) return; // User cancelled
   const opt = {
     margin:       0.5,
-    filename:     'BoardFittingMaterial.pdf',
+    filename:     `${filename}.pdf`,
     image:        { type: 'jpeg', quality: 0.98 },
     html2canvas:  { scale: 2, useCORS: true },
     jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }

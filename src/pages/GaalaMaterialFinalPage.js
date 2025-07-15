@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import  html2pdf  from "html2pdf.js";
 
 const GaalaMaterialFinalPage = () => {
   const [quantities, setQuantities] = useState({});
@@ -14,31 +15,20 @@ const GaalaMaterialFinalPage = () => {
   }, []);
 
   const handleDownloadPDF = () => {
-  const input = tableRef.current;
-
-  html2canvas(input, {
-    scale: 2, // Increase scale for higher resolution
-    useCORS: true,
-  }).then((canvas) => {
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "pt", "a4"); // Use pt units for better control
-
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-    // Calculate image dimensions for better scaling
-    const imgProps = pdf.getImageProperties(imgData);
-    const imgWidth = pdfWidth * 0.95; // 95% of page width
-    const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
-
-    const marginX = (pdfWidth - imgWidth) / 2;
-    const marginY = 20;
-
-    pdf.addImage(imgData, "PNG", marginX, marginY, imgWidth, imgHeight);
-    pdf.save("GaalaMaterial.pdf");
-  });
-};
-
+    const element = tableRef.current;
+    const filename = prompt("Enter a filename for the PDF:", "GaalaMaterial");
+    if (!filename) return; // User cancelled
+    const opt = {
+      margin:       0.5,
+      filename:     `${filename}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+  
+    html2pdf().from(element).set(opt).save();
+  };
+  
 
   let serial = 1;
 
